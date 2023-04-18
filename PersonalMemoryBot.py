@@ -57,7 +57,7 @@ def text_to_docs(text: str) -> List[Document]:
 
     for doc in page_docs:
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=4000,
+            chunk_size=2000,
             separators=["\n\n", "\n", ".", "!", "?", ",", " ", ""],
             chunk_overlap=0,
         )
@@ -146,7 +146,7 @@ if uploaded_file:
             # Set up the question-answering system
             qa = RetrievalQA.from_chain_type(
                 llm=OpenAI(openai_api_key=api),
-                chain_type="stuff",
+                chain_type = "map_reduce",
                 retriever=index.as_retriever(),
             )
             # Set up the conversational agent
